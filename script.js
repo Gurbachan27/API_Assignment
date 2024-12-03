@@ -1,24 +1,21 @@
-const options = {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
-        'X-RapidAPI-Key': '<f84bb6648fmsh6ee15beec208e70p1b695djsn0ab80258d71f>', 
-    },
-};
-
+// Define API credentials and URL template
+const apiHost = 'wft-geo-db.p.rapidapi.com';
+const apiKey = '<f84bb6648fmsh6ee15beec208e70p1b695djsn0ab80258d71f>';
+const urlTemplate = 'https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=';
 
 document.getElementById("searchButton").addEventListener("click", () => {
     const cityInput = document.getElementById("cityInput").value;
     if (cityInput) {
-        fetchCities(cityInput);
+        fetchCities(cityInput); // Call fetchCities with user input
     } else {
         alert("Please enter a city name prefix.");
     }
 });
 
 function fetchCities(namePrefix) {
-    const url = `https://${apiHost}/v1/geo/cities?namePrefix=${namePrefix}`;
+    const url = `${urlTemplate}${namePrefix}`;
 
+    // Fetch city data from the API
     fetch(url, {
         method: "GET",
         headers: {
@@ -27,8 +24,8 @@ function fetchCities(namePrefix) {
         },
     })
         .then((response) => response.json())
-        .then((data) => displayResults(data))
-        .catch((error) => console.error("Error fetching data:", error));
+        .then((data) => displayResults(data)) // Display data
+        .catch((error) => console.error("Error fetching data:", error)); // Handle errors
 }
 
 function displayResults(data) {
@@ -40,6 +37,7 @@ function displayResults(data) {
         return;
     }
 
+    // Loop through the cities and display the information
     data.data.forEach((city) => {
         const cityInfo = `
             <p>
@@ -48,8 +46,8 @@ function displayResults(data) {
                 Population: ${city.population || "N/A"}
             </p>
         `;
-        resultsDiv.innerHTML += cityInfo;
+        resultsDiv.innerHTML += cityInfo; // Append city info to the results section
     });
 }
-// Documentation: https://rapidapi.com/wirefreethought/api/geodb-cities/
 
+// Documentation: https://rapidapi.com/wirefreethought/api/geodb-cities/

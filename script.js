@@ -1,5 +1,11 @@
-const apiKey = "f84bb6648fmsh6ee15beec208e70p1b695djsn0ab80258d71f'"; // Replace with your actual API key
-const apiHost = "wft-geo-db.p.rapidapi.com";
+const options = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
+        'X-RapidAPI-Key': '<f84bb6648fmsh6ee15beec208e70p1b695djsn0ab80258d71f>', 
+    },
+};
+
 
 document.getElementById("searchButton").addEventListener("click", () => {
     const cityInput = document.getElementById("cityInput").value;
@@ -45,3 +51,5 @@ function displayResults(data) {
         resultsDiv.innerHTML += cityInfo;
     });
 }
+// Documentation: https://rapidapi.com/wirefreethought/api/geodb-cities/
+
